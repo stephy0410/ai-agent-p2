@@ -42,6 +42,7 @@ class DiscountBreakdown(BaseModel):
     order_total: float
     points_redeemed: Optional[int] = 0
     point_discount: Optional[float] = 0.0
+    tier_discount_pct: float
     tier_discount: float
     final_total: float
     total_savings: Optional[float] = 0.0
@@ -382,6 +383,7 @@ result = {{
     "order_total": round(order_total, 2),
     "points_redeemed": points_redeemed,
     "point_discount": round(point_discount, 2),
+    "tier_discount_pct": tier_rate,
     "tier_discount": round(tier_discount, 2),
     "final_total": round(final_total, 2),
     "total_savings": round(total_savings, 2),
@@ -424,6 +426,7 @@ print(json.dumps(result))
         final_total = order_total - tier_discount
         fallback_data = {
             "order_total": round(order_total, 2),
+            "tier_discount_pct": tier_rate,
             "tier_discount": round(tier_discount, 2),
             "final_total": round(final_total, 2),
             "note": "Fallback calculation (tier discount only, Code Interpreter unavailable)"
